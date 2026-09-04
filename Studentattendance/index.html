@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Attendance System</title>
+
+  <!-- Bootstrap (for professional look & responsive grid) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Optional: your custom styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Small inline helper styles — move to style.css if you prefer */
+    body { background-color: #f7fafc; }
+    header .brand { font-weight: 700; letter-spacing: .2px; }
+    .card { border-radius: 12px; }
+    .table-responsive { max-height: 54vh; overflow:auto; }
+    @media (max-width: 576px) {
+      .controls-row .col-auto { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-shadow-sm">
+    <div class="container py-3 d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <img src="logo.png" alt="Logo" style="width:44px;height:44px;object-fit:cover;border-radius:8px" onerror="this.style.display='none'">
+        <div>
+          <div class="brand h5 mb-0">Student Attendance System</div>
+          <small class="text-muted">Easy & lightweight attendance tracking</small>
+        </div>
+      </div>
+
+      <nav aria-label="Primary">
+        <ul class="nav">
+         
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <div class="row g-4">
+      <!-- Left: Controls -->
+      <div class="col-lg-4">
+        <section class="card p-4">
+          <h5 class="mb-3">Record Attendance</h5>
+
+          <!-- Date selector -->
+          <div class="mb-3">
+            <label for="attendanceDate" class="form-label">Select Date</label>
+            <input id="attendanceDate" class="form-control" type="date" aria-label="Select attendance date">
+          </div>
+
+          <!-- Add student -->
+          <form id="add-student-form" class="mb-3" novalidate>
+            <label for="studentName" class="form-label">Student name</label>
+            <div class="input-group">
+              <input id="studentName" type="text" class="form-control" placeholder="Name of student" aria-label="Student name" required>
+              <button type="submit" class="btn btn-primary" id="addStudentBtn">Add</button>
+            </div>
+            <div class="form-text">Enter student name and press Add. You can also import students later.</div>
+          </form>
+
+          <!-- Quick actions -->
+          <div class="d-grid gap-2">
+            <button id="markAllPresent" class="btn btn-success btn-sm">Mark All Present</button>
+            <button id="clearAll" class="btn btn-outline-danger btn-sm">Clear All Entries</button>
+          </div>
+        </section>
+
+        <!-- Optional: Summary card -->
+        <section class="card p-3 mt-3">
+          <div class="d-flex justify-content-between">
+            <div>
+              <small class="text-muted">Total students</small>
+              <div id="stat-total" class="h4 mb-0">0</div>
+            </div>
+            <div>
+              <small class="text-success">Present</small>
+              <div id="stat-present" class="h4 mb-0 text-success">0</div>
+            </div>
+            <div>
+              <small class="text-danger">Absent</small>
+              <div id="stat-absent" class="h4 mb-0 text-danger">0</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right: Table -->
+      <div class="col-lg-8">
+        <section class="card p-3">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h5 class="mb-0">Attendance List</h5>
+
+            <div class="btn-group" role="group" aria-label="table actions">
+              <button id="exportCsv" class="btn btn-outline-primary btn-sm">Export CSV</button>
+              <button id="downloadPdf" class="btn btn-outline-secondary btn-sm">Download PDF</button>
+            </div>
+          </div>
+
+          <!-- Responsive table wrapper -->
+          <div class="table-responsive">
+            <table class="table table-hover align-middle" id="attendanceTable" aria-describedby="Attendance list">
+              <thead class="table-light sticky-top">
+                <tr>
+                  <th scope="col" style="width:85px">Roll No</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col" style="width:160px">Status</th>
+                  <th scope="col" style="width:120px" class="text-end">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="attendance-tbody">
+                <!-- rows inserted by script.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-3 d-flex justify-content-end gap-2">
+            <small class="text-muted align-self-center">Tip: Click "Present" or "Absent" to toggle status.</small>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+    <div class="container py-3 text-center text-muted small">
+      © <span id="year"></span> Student Attendance System
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your script (keep your existing logic) -->
+  <script src="script.js"></script>
+
+  <script>
+    // small helper: set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Example: preserve existing behavior if your script expects specific ids.
+    // If your original script relied on a tbody without id, you can change this id back,
+    // or update the script to use document.getElementById('attendance-tbody')
+  </script>
+</body>
+</html>

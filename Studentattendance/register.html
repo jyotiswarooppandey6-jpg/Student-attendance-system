@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Register - Student Attendance System</title>
+
+<!-- Bootstrap (optional) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Optional local small style to match glass look if you don't use global CSS -->
+<style>
+  body{
+    font-family: "Poppins", sans-serif;
+    background: url("bgimage.jpg") center/cover fixed no-repeat;
+    margin: 0;
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+
+  .card{
+    width:100%;
+    max-width:480px;
+    border-radius:18px;
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border:1px solid rgba(255,255,255,0.38);
+    box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+    padding:28px;
+  }
+
+  .form-control{
+    background: rgba(255,255,255,0.78) !important;
+    border: 2px solid #e6e9ef !important;
+    border-radius:10px !important;
+    padding:10px !important;
+    font-size:15px;
+  }
+
+  .form-control:focus{
+    border-color:#5b68f0 !important;
+    box-shadow:0 8px 18px rgba(91,104,240,0.18) !important;
+    transform: translateY(-2px);
+  }
+
+  #registerBtn{
+    background:#5b68f0;
+    border:none;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    font-weight:600;
+    width:100%;
+  }
+  #registerBtn:hover{ background:#4f5ad8; transform: translateY(-3px); }
+
+  .small-muted{ color: rgba(0,0,0,0.55); font-size:14px; }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h3 class="mb-1 fw-bold text-center">Create Account</h3>
+    <p class="small-muted text-center mb-3">Register to access the Attendance System</p>
+
+    <form id="registerForm" novalidate>
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" id="fullname" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" id="username" class="form-control" required>
+        <div class="form-text">Choose a unique username (no spaces).</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" minlength="6" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" id="confirmPassword" class="form-control" required>
+      </div>
+
+      <button type="submit" id="registerBtn">Register</button>
+
+      <p class="text-center mt-3 small-muted">
+        Already have an account?
+        <a href="login.html">Login</a>
+      </p>
+    </form>
+  </div>
+
+<script>
+/*
+ Registration logic:
+ - Saves user object to localStorage under "attendance_user_<username>"
+ - username must be unique
+ - stores fullname, username, password (plain text in localStorage — acceptable for demo)
+*/
+
+document.getElementById("registerForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const fullname = document.getElementById("fullname").value.trim();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if(!fullname || !username || !password || !confirmPassword){
+    alert("Please fill all fields.");
+    return;
+  }
+
+  if(/\s/.test(username)){
+    alert("Username cannot contain spaces.");
+    return;
+  }
+
+  if(password !== confirmPassword){
+    alert("Passwords do not match.");
+    return;
+  }
+
+  // Check if username exists
+  if(localStorage.getItem("attendance_user_" + username)){
+    alert("Username already exists. Choose another.");
+    return;
+  }
+
+  // Save user
+  const user = { fullname, username, password };
+  localStorage.setItem("attendance_user_" + username, JSON.stringify(user));
+
+  alert("Registration successful. You will be redirected to login.");
+  window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

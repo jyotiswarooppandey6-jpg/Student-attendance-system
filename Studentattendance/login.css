@@ -1,0 +1,190 @@
+/* ===== login.css - Complete updated for pure full-screen bg image ===== */
+
+/* ---------------- Variables ---------------- */
+:root{
+  --accent: #0d6efd;
+  --accent-2: #0b5ed7;
+  --muted: #6c757d;
+  --danger: #dc3545;
+  --card-bg: #ffffff;          /* card background (solid) */
+  --card-radius: 12px;
+}
+
+/* ---------------- Reset / Base ---------------- */
+*{box-sizing:border-box}
+html, body { height: 100%; margin: 0; padding: 0; }
+body { font-family: Inter, system-ui, "Segoe UI", Roboto, Arial, sans-serif; }
+
+/* ---------------- Full-screen background image ---------------- */
+/* Put bgimage.jpg in the same folder as this HTML/CSS file.
+   If it's in assets/images/bgimage.jpg use url("assets/images/bgimage.jpg") instead. */
+body {
+  background: url("bgimage.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ensure there is no background overlay from previous CSS */
+body::before { content: none !important; }
+
+/* If your container had bg-light class, override it so image shows through */
+.vh-100.bg-light { background: transparent !important; }
+
+/* Ensure page content sits above the background */
+.vh-100, #login-card, #app, .container, .card {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------- Center container ---------------- */
+.vh-100 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+/* ---------------- Login card ---------------- */
+#login-card{
+  width: 100%;
+  max-width: 920px;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  background: var(--card-bg); /* solid white card for readability */
+  box-shadow: 0 12px 40px rgba(20,30,60,0.18);
+  border: 1px solid rgba(0,0,0,0.04);
+  transform-origin: center;
+  opacity: 0;
+  transform: translateY(18px) scale(0.995);
+  animation: cardEnter 560ms cubic-bezier(.2,.9,.25,1) forwards;
+}
+
+/* card entrance */
+@keyframes cardEnter {
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* ---------------- Left blue panel ---------------- */
+.login-left{
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: #fff;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px;
+}
+
+/* ---------------- Right panel padding ---------------- */
+#login-card .col-md-7 { padding: 30px; }
+
+/* Headings */
+h2, h4 { margin: 0; }
+
+/* ---------------- Form inputs ---------------- */
+.form-control{
+  border-radius: 8px;
+  border: 1px solid #e7ecf8;
+  padding: 12px 14px;
+  transition: box-shadow .18s ease, border-color .18s ease, transform .15s ease;
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  color: #222;
+}
+
+/* focus effect */
+.form-control:focus{
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(13,110,253,0.12);
+  transform: translateY(-1px);
+}
+
+/* placeholder */
+.form-control::placeholder { color: #bfc9de; }
+
+/* invalid */
+.form-control.is-invalid{
+  border-color: var(--danger);
+  box-shadow: 0 8px 24px rgba(220,53,69,0.08);
+}
+
+/* small muted */
+.text-muted.small { color: var(--muted); }
+
+/* ---------------- Buttons ---------------- */
+.btn-primary{
+  --btn-h: 44px;
+  height: var(--btn-h);
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(13,110,253,0.12);
+}
+
+/* loading state */
+.btn-primary.loading{
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+/* spinner inside btn */
+.btn-primary .spinner{
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: #fff;
+  animation: spin .8s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------------- Card error / success animations ---------------- */
+/* shake on error */
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+#login-card.shake {
+  animation: shake 480ms cubic-bezier(.36,.07,.19,.97);
+  box-shadow: 0 10px 36px rgba(220,53,69,0.08);
+  border: 1px solid rgba(220,53,69,0.08);
+}
+
+/* success slide-out */
+#login-card.success {
+  animation: cardExit 520ms cubic-bezier(.18,.9,.28,1) forwards;
+}
+@keyframes cardExit {
+  to { transform: translateX(120%) rotateY(-6deg) scale(.98); opacity: 0; }
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 767px){
+  .login-left { display: none; }
+  #login-card .col-md-7 { padding: 18px; }
+  .mw-900 { padding: 0 12px; }
+}
+
+/* ---------------- App area ---------------- */
+#app { transition: opacity .3s ease; }
+
+/* ---------------- Small helpers ---------------- */
+.mb-2 { margin-bottom: .5rem; }
+.mt-3 { margin-top: 1rem; }
+.d-grid { display: grid; }

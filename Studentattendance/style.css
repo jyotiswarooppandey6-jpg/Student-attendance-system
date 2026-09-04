@@ -1,0 +1,154 @@
+/* ===================================================
+   UPDATED PROFESSIONAL CSS FOR index.html (Bootstrap)
+   Background + Glass UI + Table + Buttons
+=================================================== */
+
+/* ---------- GLOBAL ---------- */
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: url("student.jpg") no-repeat center center / cover fixed;
+    margin: 0;
+    padding: 0;
+}
+
+/* Glass effect for cards */
+.card {
+    background: rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 16px !important;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.20);
+}
+
+/* Header */
+header {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Brand */
+.brand {
+    font-weight: 700;
+    color: #222;
+}
+
+/* ---------- FORM ELEMENTS ---------- */
+
+input, select, textarea {
+    background: rgba(255,255,255,0.80) !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 10px !important;
+    transition: .25s;
+}
+
+input:focus {
+    border-color: #5b68f0 !important;
+    box-shadow: 0 0 10px rgba(91,104,240,0.3) !important;
+}
+
+/* Add button */
+#addStudentBtn {
+    background: #5b68f0;
+    border: none;
+    box-shadow: 0px 5px 12px rgba(91,104,240,0.35);
+    transition: .3s;
+}
+
+#addStudentBtn:hover {
+    background: #4f5ad8;
+    transform: translateY(-2px);
+}
+
+/* Mark All / Clear Buttons */
+.btn-success {
+    box-shadow: 0px 4px 10px rgba(40,167,69,0.3);
+}
+.btn-outline-danger:hover {
+    transform: translateY(-2px);
+}
+
+/* ---------- TABLE STYLING ---------- */
+
+table {
+    border-radius: 12px;
+    overflow: hidden !important;
+}
+
+table thead {
+    background: #5b68f0 !important;
+    color: white !important;
+}
+
+table th {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: .4px;
+}
+
+tbody tr {
+    background: rgba(255,255,255,0.85);
+    transition: .20s;
+}
+
+tbody tr:hover {
+    background: rgba(240,240,240,0.9);
+    transform: translateY(-1px);
+}
+
+/* ---------- STATUS BADGES ---------- */
+.badge {
+    padding: 7px 11px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.bg-success {
+    background: #28a745 !important;
+}
+
+.bg-danger {
+    background: #dc3545 !important;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+
+.present-btn,
+.absent-btn {
+    padding: 6px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    transition: .25s;
+}
+
+.present-btn {
+    background: #28a745;
+    color: white;
+    box-shadow: 0px 4px 12px rgba(40,167,69,0.25);
+}
+
+.present-btn:hover {
+    transform: translateY(-3px);
+}
+
+.absent-btn {
+    background: #e63946;
+    color: white;
+    box-shadow: 0px 4px 12px rgba(230,57,70,0.25);
+}
+
+.absent-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width: 768px) {
+    .card {
+        padding: 16px !important;
+    }
+}
